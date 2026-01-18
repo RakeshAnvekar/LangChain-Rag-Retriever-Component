@@ -154,6 +154,7 @@ How can I stay healthy?
 
 **Final Result**
 Documents covering nutrition, exercise, stress, and sleep
+<img width="1240" height="526" alt="1_NKSogwLjiLPTtOp7EAynsg" src="https://github.com/user-attachments/assets/4bd1f288-951f-4bc2-90e2-d381a0633f3d" />
 
 ---
 
@@ -187,6 +188,7 @@ Photosynthesis is the process by which plants convert light energy into chemical
 - Reduced context size
 - Lower token usage
 - Higher answer accuracy
+![0_KXV2naD6QGiWbFLb](https://github.com/user-attachments/assets/0c2a7445-3353-4b4a-a479-7d32b6e85e05)
 
 ---
 

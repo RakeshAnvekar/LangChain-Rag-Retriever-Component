@@ -1,0 +1,146 @@
+Retrivers
+
+A retrivers is a component in langchain that fetches relevent documents from a data source in response to a user query
+
+there are multiple types of rfetrivers
+
+
+Datasource--------------------retrivers --------------------> documents
+                                |
+
+                                |
+                                |  
+                                |
+                                |
+                                |
+                                |
+                                query
+
+ when user ask an query,query raches to retrivers ,retriver internally connect to data source and scan the documents .
+ and try to understand which document is ore relevent for tgis guven query,
+ and fets the docuemnt.
+
+
+ retrivers is nothing but function take input as query in return it returns multiple matcheg documens.
+ its lije serah engine
+
+ in langchain muliple retrivers for diff se cases
+
+
+all retrivers i langchain are runnables
+
+uing retrivers we can make an chain.
+
+
+Types of retgrivers on two baasis
+
+
+---1) based on data source
+
+1) Wikipidua retrivrs: it takes user query and search in wikipidia articles
+
+you gve it a query eg abdhul kalam,
+it sends query to wikipidia api
+it retrivers the most relevent articles
+it returns them as langchain document object
+
+
+2)vecter store retgriver: it search user query in vecter store ,to get relevet douement
+
+its most common ype of retriver that let you search and fetch docuents  fro vector store based on semantic similarity using vector embeddings
+
+you store your documents in vecter store like faiss,chroma
+each document is converted in to dense vector using an ebedding model
+
+when user enters an query its also turned in to vecter
+he retriver compares the query vectro with stored vectors
+it retrivers the top-k most similar ones
+
+
+3)archive retriver: its seachers in research papers
+
+
+---2)based on retriver search stargergy
+
+1) MMR(maximal marginal relevence)
+
+mmr is an information retrivel algoritham designed to reduce redundency in h rerived results while maintaning high relevance to the query
+
+why mmr
+
+in regular similarirt search  you may get documents that are
+all very similar to each other
+
+repeating same informationlacking diverse prespective
+
+MMR retrivers avoids that by picking most relevent documents first then leaast similar to already selected docuents
+
+this hekps if you want context widow to content diverse but still relevent information
+
+espicaly when documents are sementically overaping
+
+2)multi query retriver
+
+
+some times a single query might not capture all the result, when user sed query its meaning may not clear, then the qualiry of the search result may not good
+
+think in our vecter store we have data on health,nutrician ,proteen related data.
+
+what f user ask a query how can i stay healthy
+
+could meaningwhat should i eat
+how oftern shlud i exersise
+
+how i can manage stress
+
+a simple similarirt search might miss documents that talk  about those things but dont use the word healthy.
+
+
+quesy (ambigious)----------->llm------> frrm this query it generates multiple queries 
+we pass thease query to  our retrivers each retriver will pick each query and tr to featch the document relevent to its query
+we get 5 documemt per each retriver.
+
+then we merge the results by removing the duplicate and show top results.
+
+show this from good examoe diagram
+
+4)contextual compression retgrivel
+the contextual compression retgrivel in langchain is an advanced etrivel that improves retrival quality by compressing  th documents after retrival, eeping only the relevant content  based on users query
+
+examle:
+query: what s photosynthesis
+retrived docuemnt(by a traditional retriver)
+
+the Grand canyan ia a famous natural site.
+photosynthesis is how plants convert light into energy,
+.any tourist visit every year
+
+problem:
+the retriver returns the entire pargraph
+only one setence is actually relevent to the query
+the rest is irreelevent noise that wastes the context window and many confuse the llm.
+
+
+what contextual retrival dsoes is 
+it return only the relevent part
+
+photosynthesis is how plants convert light into energy
+
+
+how it works:
+
+retrivr retrives the N documents
+a compresser (usually an llm ) is applied to eah docuent.
+The compresser keeps only the relevent part to the query
+irrelevent content is discarded.
+
+
+when to use:
+
+yor docuet are long and contain mixed informtaion.
+
+you wnat to reduce context length for llms
+you need to impreve answer accuracy in RAg application
+
+
+
